@@ -223,6 +223,18 @@
   margin-top: 4px; /* 增加与上方单词标题的间距 */
 }
 
+/* 隐藏英式发音 */
+.__shanbay-popover .uk-phonetic {
+  display: none;
+}
+
+/* 美式发音样式优化 */
+.__shanbay-popover .us-phonetic {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .__shanbay-popover #shanbay-content {
   padding: 20px !important;
 }

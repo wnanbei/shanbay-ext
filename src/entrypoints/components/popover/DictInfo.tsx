@@ -174,7 +174,7 @@ const DictInfoComponent: React.FC<DictInfoComponentProps> = ({ word }) => {
         <div className="phonetic-symbols">
           {
             data && data.audios && data.audios.length > 0 && data.audios[0].uk && (
-              <div className="phonetic-item">
+              <div className="phonetic-item uk-phonetic">
                 <span className="phonetic-label">uk: </span>
                 <small className="phonetic-text">
                   /{data.audios[0].uk.ipa}/
@@ -189,7 +189,7 @@ const DictInfoComponent: React.FC<DictInfoComponentProps> = ({ word }) => {
           }
           {
             data && data.audios && data.audios.length > 0 && data.audios[0].us && (
-              <div className="phonetic-item">
+              <div className="phonetic-item us-phonetic">
                 <span className="phonetic-label">us: </span>
                 <small className="phonetic-text">
                   /{data.audios[0].us.ipa}/
