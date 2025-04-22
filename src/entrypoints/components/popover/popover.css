@@ -150,13 +150,54 @@
   line-height: 1.6;
 }
 
+/* 优化例句区块样式 */
 .__shanbay-popover #shanbay-example-sentence-div {
-  padding: 16px 0;
-  margin-top: 16px;
-  border-top: 1px solid #edf2f7;
+  padding: 0;
+  margin-top: 0;
+  border-top: none;
   color: #666;
   font-size: 14px;
   line-height: 1.6;
+}
+
+.__shanbay-popover .example-section {
+  margin-bottom: 24px !important;
+}
+
+.__shanbay-popover .example-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+  margin-bottom: 0px;
+  padding-bottom: 6px;
+}
+
+.__shanbay-popover .example-item {
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed #eee;
+}
+
+.__shanbay-popover .example-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.__shanbay-popover .example-english {
+  margin-bottom: 6px;
+  color: #333;
+  font-weight: 500;
+}
+
+.__shanbay-popover .example-chinese {
+  color: #666;
+  font-size: 13px;
+}
+
+.__shanbay-popover .example-index {
+  color: #999;
+  margin-right: 4px;
 }
 
 .__shanbay-popover #shanbay-content #shanbay-footer {
@@ -200,7 +241,7 @@
   font-size: 16px;
   font-weight: 500;
   color: #000000;
-  margin-bottom: 8px;
+  margin-bottom: 0px;
   padding-bottom: 6px;
 }
 

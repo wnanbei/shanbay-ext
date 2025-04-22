@@ -64,6 +64,14 @@ const DictInfoComponent: React.FC<DictInfoComponentProps> = ({ word }) => {
       }
     }
   }, [data])
+
+  // 添加新的 useEffect 钩子，在单词数据加载完成后自动获取例句
+  useEffect(() => {
+    if (data && data.id) {
+      getWordExample()
+    }
+  }, [data?.id])
+
   useEffect(() => {
     storage.getItem<ExSettings>(`local:__shanbayExtensionSettings`).then((res) => {
       setSettings(res)
@@ -225,8 +233,9 @@ const DictInfoComponent: React.FC<DictInfoComponentProps> = ({ word }) => {
           }
         </div>
         {
-          exampleData && (
+          exampleData && exampleData.length > 0 && (
             <div className="simple-definition example-section" id="shanbay-example-sentence-div">
+              <h3 className="example-title">例句</h3>
               {
                 exampleData.map((item, index) => (
                   <Fragment key={index}>
@@ -247,11 +256,7 @@ const DictInfoComponent: React.FC<DictInfoComponentProps> = ({ word }) => {
           )
         }
         <div id="shanbay-footer" className="footer-section">
-          {exampleSentence && !exampleData &&
-            (<span id="shanbay-example-sentence-span">
-              <button className="shanbay-btn secondary-btn" id="shanbay-example-sentence-btn" onClick={getWordExample}>查看例句</button>
-            </span>)
-          }
+          {/* 移除例句按钮 */}
           {
             data && data.exists !== 'error' && (
               <span id="shanbay-add-word-span">
