@@ -115,22 +115,24 @@ const DictInfoComponent: React.FC<DictInfoComponentProps> = ({ word }) => {
   }
   const { paraphrase, exampleSentence } = settings || {}
   if (loading) {
-    return <div>查询中...</div>
+    return <div className="loading-state">查询中...</div>
   }
 
   if (error) {
     return (
-      <div id="shanbay-inner">
+      <div id="shanbay-inner" className="popup-container error-container">
         <div className="has-error" id="shanbay-title">
           <div className="error-message">请求失败，请登录后刷新本页面</div>
-          <div className="login"><a className="shanbay-btn" href="https://web.shanbay.com/web/account/login/" target="_blank">去登录</a></div>
+          <div className="login">
+            <a className="shanbay-btn primary-btn" href="https://web.shanbay.com/web/account/login/" target="_blank">去登录</a>
+          </div>
         </div>
       </div>
     )
   }
   if (failed) {
     return (
-      <div id="shanbay-inner">
+      <div id="shanbay-inner" className="popup-container error-container">
         <div className="has-error" id="shanbay-title">
           <div className="error-message">未查询到单词</div>
         </div>
@@ -138,21 +140,21 @@ const DictInfoComponent: React.FC<DictInfoComponentProps> = ({ word }) => {
     )
   }
   return (
-    <div id="shanbay-inner">
-      <div id="shanbay-title">
-        <span className="word">
-          {data?.content}
-        </span>
-        <a className="check-detail" href={`https://web.shanbay.com/wordsweb/#/detail/${data?.id}`} target="_blank"> 查看详情 </a>
+    <div id="shanbay-inner" className="popup-container">
+      <div id="shanbay-title" className="title-section">
+        <div className="word-header">
+          <span className="word">
+            {data?.content}
+          </span>
+          <a className="check-detail" href={`https://web.shanbay.com/wordsweb/#/detail/${data?.id}`} target="_blank">查看详情</a>
+        </div>
         <div className="phonetic-symbols">
           {
             data && data.audios && data.audios.length > 0 && data.audios[0].uk && (
-              <div>
-                <span>uk: </span>
-                <small>
-                  /
-                  {data.audios[0].uk.ipa}
-                  /
+              <div className="phonetic-item">
+                <span className="phonetic-label">uk: </span>
+                <small className="phonetic-text">
+                  /{data.audios[0].uk.ipa}/
                 </small>
                 {data.audios[0].uk.urls.length > 0 && (
                   <span className="speaker uk" onClick={() => onPlayAudio(data.audios[0].uk.urls[0])}>
@@ -164,12 +166,10 @@ const DictInfoComponent: React.FC<DictInfoComponentProps> = ({ word }) => {
           }
           {
             data && data.audios && data.audios.length > 0 && data.audios[0].us && (
-              <div>
-                <span>us: </span>
-                <small>
-                  /
-                  {data.audios[0].us.ipa}
-                  /
+              <div className="phonetic-item">
+                <span className="phonetic-label">us: </span>
+                <small className="phonetic-text">
+                  /{data.audios[0].us.ipa}/
                 </small>
                 {data.audios[0].us.urls.length > 0 && (
                   <span className="speaker us" onClick={() => onPlayAudio(data.audios[0].us.urls[0])}>
@@ -181,25 +181,24 @@ const DictInfoComponent: React.FC<DictInfoComponentProps> = ({ word }) => {
           }
         </div>
       </div>
-      <div id="shanbay-content">
-        <div className="simple-definition">
+      <div id="shanbay-content" className="content-section">
+        <div className="simple-definition definition-section">
           {
             paraphrase !== 'English' &&
             data && data?.definitions.cn.length > 0
             && (
-              <div>
-                <b>中文：</b>
+              <div className="definition-block">
+                <b className="definition-title">中文：</b>
                 {
                   data.definitions.cn.map((p, idx) => (
-                    <div key={`${p.dict_id}_${idx}`}>
-                      <span style={{ color: '#333' }}>
+                    <div key={`${p.dict_id}_${idx}`} className="definition-item">
+                      <span className="pos-tag">
                         {p.pos}
                         {' '}
                       </span>
-                      <span>{p.def}</span>
+                      <span className="def-text">{p.def}</span>
                     </div>
-                  ),
-                  )
+                  ))
                 }
               </div>
             )
@@ -208,19 +207,18 @@ const DictInfoComponent: React.FC<DictInfoComponentProps> = ({ word }) => {
             paraphrase !== 'Chinese' &&
             data && data?.definitions.en.length > 0
             && (
-              <div>
-                <b>英文：</b>
+              <div className="definition-block">
+                <b className="definition-title">英文：</b>
                 {
                   data.definitions.en.map((p, idx) => (
-                    <div key={`${p.dict_id}_${idx}`}>
-                      <span style={{ color: '#333' }}>
+                    <div key={`${p.dict_id}_${idx}`} className="definition-item">
+                      <span className="pos-tag">
                         {p.pos}
                         {' '}
                       </span>
-                      <span>{p.def}</span>
+                      <span className="def-text">{p.def}</span>
                     </div>
-                  ),
-                  )
+                  ))
                 }
               </div>
             )
@@ -228,36 +226,39 @@ const DictInfoComponent: React.FC<DictInfoComponentProps> = ({ word }) => {
         </div>
         {
           exampleData && (
-            <div className="simple-definition" id="shanbay-example-sentence-div">
+            <div className="simple-definition example-section" id="shanbay-example-sentence-div">
               {
                 exampleData.map((item, index) => (
                   <Fragment key={index}>
-                  <p>{index + 1},
-                    <span dangerouslySetInnerHTML={{ __html: item.content_en.replaceAll('vocab', 'b') }}></span>
-                    <span className="speaker" onClick={() => onPlayAudio(item.audio.us.urls[0])}>
-                      <audio src={item.audio.us.urls[0]}></audio>
-                    </span>
-                  </p>
-                  <p>{item.content_cn}</p>
+                    <div className="example-item">
+                      <p className="example-english">
+                        <span className="example-index">{index + 1}. </span>
+                        <span dangerouslySetInnerHTML={{ __html: item.content_en.replaceAll('vocab', 'b') }}></span>
+                        <span className="speaker" onClick={() => onPlayAudio(item.audio.us.urls[0])}>
+                          <audio src={item.audio.us.urls[0]}></audio>
+                        </span>
+                      </p>
+                      <p className="example-chinese">{item.content_cn}</p>
+                    </div>
                   </Fragment>
                 ))
               }
             </div>
           )
         }
-        <div id="shanbay-footer">
+        <div id="shanbay-footer" className="footer-section">
           {exampleSentence && !exampleData &&
             (<span id="shanbay-example-sentence-span">
-              <button className="shanbay-btn" id="shanbay-example-sentence-btn" onClick={getWordExample}>查看例句</button>
-              </span>)
+              <button className="shanbay-btn secondary-btn" id="shanbay-example-sentence-btn" onClick={getWordExample}>查看例句</button>
+            </span>)
           }
           {
             data && data.exists !== 'error' && (
               <span id="shanbay-add-word-span">
                 {
                   data.exists ? 
-                  <button id="shanbay-add-word-btn" className='shanbay-btn forget' onClick={onAddOrForget}>我忘了</button> :
-                  <button id="shanbay-add-word-btn" className='shanbay-btn' onClick={onAddOrForget}>添加</button>
+                  <button id="shanbay-add-word-btn" className='shanbay-btn primary-btn forget' onClick={onAddOrForget}>我忘了</button> :
+                  <button id="shanbay-add-word-btn" className='shanbay-btn primary-btn' onClick={onAddOrForget}>添加</button>
                 }
               </span>
             )
