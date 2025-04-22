@@ -187,8 +187,8 @@ const DictInfoComponent: React.FC<DictInfoComponentProps> = ({ word }) => {
             paraphrase !== 'English' &&
             data && data?.definitions.cn.length > 0
             && (
-              <div className="definition-block">
-                <b className="definition-title">中文：</b>
+              <div className="definition-block cn-definition">
+                <h3 className="definition-title">中文</h3>
                 {
                   data.definitions.cn.map((p, idx) => (
                     <div key={`${p.dict_id}_${idx}`} className="definition-item">
@@ -207,8 +207,8 @@ const DictInfoComponent: React.FC<DictInfoComponentProps> = ({ word }) => {
             paraphrase !== 'Chinese' &&
             data && data?.definitions.en.length > 0
             && (
-              <div className="definition-block">
-                <b className="definition-title">英文：</b>
+              <div className="definition-block en-definition">
+                <h3 className="definition-title">英文</h3>
                 {
                   data.definitions.en.map((p, idx) => (
                     <div key={`${p.dict_id}_${idx}`} className="definition-item">

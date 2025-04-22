@@ -194,3 +194,40 @@
   border-radius: 16px;
   background-color: #fff;
 }
+
+/* 修改标题样式 */
+.__shanbay-popover .definition-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+}
+
+/* 增加定义块之间的间距 */
+.__shanbay-popover .definition-block {
+  margin-bottom: 20px;
+}
+
+/* 增加定义项之间的间距 */
+.__shanbay-popover .definition-item {
+  margin-bottom: 5px;
+  line-height: 1.6;
+}
+
+/* 中英文定义区块分隔 */
+.__shanbay-popover .cn-definition {
+  margin-bottom: 24px;
+}
+
+/* 调整词性标签样式 */
+.__shanbay-popover .pos-tag {
+  color: #666;
+  font-style: italic;
+  margin-right: 6px;
+}
+
+/* 调整定义文本样式 */
+.__shanbay-popover .def-text {
+  color: #333;
+}
