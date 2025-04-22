@@ -54,23 +54,40 @@
 /* 收藏按钮样式 */
 .favorite-icon {
   position: absolute;
-  top: 16px;
+  top: 24px;
+  /* 调整为与单词标题对齐 */
   right: 16px;
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   cursor: pointer;
-  color: #888;
-  transition: color 0.2s ease;
-  font-size: 18px;
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.favorite-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: #aaa;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: all 0.3s ease;
 }
 
 .favorite-icon:hover {
-  color: #f1c40f;
   transform: scale(1.1);
 }
 
-.favorite-icon.active {
-  color: #f1c40f;
+.favorite-icon:hover svg {
+  stroke: #f1c40f;
+}
+
+.favorite-icon.active svg {
+  fill: #f1c40f;
+  stroke: #f1c40f;
 }
 
 #__shanbay-popover {
@@ -95,11 +112,14 @@
   transition: all 0.3s ease;
 }
 
+/* 调整标题区域，为收藏按钮留出空间 */
 .__shanbay-popover #shanbay-title {
   background-color: #fff;
   margin: 0 !important;
   padding: 20px !important;
   border-bottom: 1px solid #edf2f7;
+  position: relative;
+  /* 添加相对定位，作为收藏按钮的定位参考 */
 }
 
 .__shanbay-popover #shanbay-title .word {
@@ -107,6 +127,8 @@
   font-weight: bold;
   color: #333;
   margin-bottom: 8px;
+  padding-right: 30px;
+  /* 为收藏按钮留出空间，防止文字过长时重叠 */
 }
 
 .__shanbay-popover #shanbay-title .phonetic-symbols {
@@ -200,13 +222,10 @@
   margin-right: 4px;
 }
 
+/* 移除底部按钮区域的样式 */
 .__shanbay-popover #shanbay-content #shanbay-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 16px;
-  margin-top: 16px;
-  border-top: 1px solid #edf2f7;
+  display: none;
+  /* 改为不显示 */
 }
 
 .__shanbay-popover #shanbay-arrow,

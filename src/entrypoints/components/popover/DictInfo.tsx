@@ -155,6 +155,19 @@ const DictInfoComponent: React.FC<DictInfoComponentProps> = ({ word }) => {
             {data?.content}
           </span>
           <a className="check-detail" href={`https://web.shanbay.com/wordsweb/#/detail/${data?.id}`} target="_blank">查看详情</a>
+          {
+            data && data.exists !== 'error' && (
+              <span 
+                className={`favorite-icon ${data.exists ? 'active' : ''}`} 
+                onClick={onAddOrForget}
+                title={data.exists ? '从生词本移除' : '添加到生词本'}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z" />
+                </svg>
+              </span>
+            )
+          }
         </div>
         <div className="phonetic-symbols">
           {
@@ -255,20 +268,7 @@ const DictInfoComponent: React.FC<DictInfoComponentProps> = ({ word }) => {
             </div>
           )
         }
-        <div id="shanbay-footer" className="footer-section">
-          {/* 移除例句按钮 */}
-          {
-            data && data.exists !== 'error' && (
-              <span id="shanbay-add-word-span">
-                {
-                  data.exists ? 
-                  <button id="shanbay-add-word-btn" className='shanbay-btn primary-btn forget' onClick={onAddOrForget}>我忘了</button> :
-                  <button id="shanbay-add-word-btn" className='shanbay-btn primary-btn' onClick={onAddOrForget}>添加</button>
-                }
-              </span>
-            )
-          }
-        </div>
+        {/* 完全移除底部区域 */}
       </div>
     </div>
   )
