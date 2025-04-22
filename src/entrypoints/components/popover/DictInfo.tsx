@@ -154,20 +154,22 @@ const DictInfoComponent: React.FC<DictInfoComponentProps> = ({ word }) => {
           <span className="word">
             {data?.content}
           </span>
-          <a className="check-detail" href={`https://web.shanbay.com/wordsweb/#/detail/${data?.id}`} target="_blank">查看详情</a>
-          {
-            data && data.exists !== 'error' && (
-              <span 
-                className={`favorite-icon ${data.exists ? 'active' : ''}`} 
-                onClick={onAddOrForget}
-                title={data.exists ? '从生词本移除' : '添加到生词本'}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z" />
-                </svg>
-              </span>
-            )
-          }
+          <div className="action-buttons">
+            <a className="check-detail" href={`https://web.shanbay.com/wordsweb/#/detail/${data?.id}`} target="_blank">查看详情</a>
+            {
+              data && data.exists !== 'error' && (
+                <span 
+                  className={`favorite-icon ${data.exists ? 'active' : ''}`} 
+                  onClick={onAddOrForget}
+                  title={data.exists ? '从生词本移除' : '添加到生词本'}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z" />
+                  </svg>
+                </span>
+              )
+            }
+          </div>
         </div>
         <div className="phonetic-symbols">
           {

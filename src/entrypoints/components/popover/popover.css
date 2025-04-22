@@ -41,14 +41,29 @@
 }
 
 .__shanbay-popover a {
-  color: #007BFF;
+  color: #5a6c8a; /* 更改为低饱和度的蓝灰色 */
   text-decoration: none;
   transition: all 0.2s ease;
 }
 
 .__shanbay-popover a:hover {
-  color: #0056b3;
+  color: #3a4a68; /* 悬停时颜色更深但仍保持低饱和度 */
   text-decoration: none;
+}
+
+.__shanbay-popover .check-detail {
+  font-size: 13px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background-color: #f5f7fa;
+  color: #5a6c8a;
+  margin-left: 10px;
+  transition: all 0.2s ease;
+}
+
+.__shanbay-popover .check-detail:hover {
+  background-color: #e9ecf1;
+  color: #3a4a68;
 }
 
 /* 收藏按钮样式 */
@@ -97,7 +112,7 @@
   left: 0;
   z-index: 101000;
   display: none;
-  width: 320px;
+  width: 400px;
   padding: 0 !important;
   text-align: left;
   background-color: #fff;
@@ -122,13 +137,81 @@
   /* 添加相对定位，作为收藏按钮的定位参考 */
 }
 
+/* 优化单词标题区域的布局 */
+.__shanbay-popover .word-header {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 12px;
+  justify-content: space-between; /* 添加两端对齐 */
+}
+
 .__shanbay-popover #shanbay-title .word {
   font-size: 24px;
   font-weight: bold;
   color: #333;
-  margin-bottom: 8px;
-  padding-right: 30px;
-  /* 为收藏按钮留出空间，防止文字过长时重叠 */
+  margin: 0;
+  padding-right: 0; /* 移除右侧内边距 */
+  flex-shrink: 0;
+  max-width: 60%; /* 限制单词宽度，避免过长 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 创建一个容器来放置查看详情和收藏按钮 */
+.__shanbay-popover .action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 按钮之间的间距 */
+}
+
+.__shanbay-popover .check-detail {
+  font-size: 13px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: #f5f7fa;
+  color: #5a6c8a;
+  margin-left: 0; /* 移除左边距 */
+  transition: all 0.2s ease;
+  align-self: center;
+  white-space: nowrap;
+}
+
+/* 收藏按钮样式 */
+.favorite-icon {
+  position: static; /* 保持静态定位 */
+  margin-left: 0; /* 移除左边距 */
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.favorite-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: #aaa;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: all 0.3s ease;
+}
+
+.favorite-icon:hover {
+  transform: scale(1.1);
+}
+
+.favorite-icon:hover svg {
+  stroke: #f1c40f;
+}
+
+.favorite-icon.active svg {
+  fill: #f1c40f;
+  stroke: #f1c40f;
 }
 
 .__shanbay-popover #shanbay-title .phonetic-symbols {
@@ -137,6 +220,7 @@
   gap: 16px;
   color: #999;
   font-size: 14px;
+  margin-top: 4px; /* 增加与上方单词标题的间距 */
 }
 
 .__shanbay-popover #shanbay-content {
@@ -187,7 +271,7 @@
 }
 
 .__shanbay-popover .example-title {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   color: #000000;
   margin-bottom: 0px;
@@ -249,7 +333,7 @@
 
 .__shanbay-popover #shanbay-inner {
   padding: 0;
-  width: 320px;
+  width: 400px;
   overflow: hidden;
   border-radius: 16px;
   background-color: #fff;
@@ -257,7 +341,7 @@
 
 /* 修改标题样式 */
 .__shanbay-popover .definition-title {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   color: #000000;
   margin-bottom: 0px;
