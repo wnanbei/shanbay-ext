@@ -1,0 +1,1 @@
+import"./_commonjsHelpers-DKZ2hJOu.js";import{b as n,E as r}from"./types-DnamOXio.js";n.runtime.onMessage.addListener(o=>{if(o.action===r.PlayAudio){const a=o.url,i=new Audio(a);i.volume=1,i.play()}});
